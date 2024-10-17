@@ -1,18 +1,27 @@
 {
   "manifest_version": 3,
-  "name": "Hello World Side Panel",
+  "name": "Annotation App",
   "version": "1.0",
-  "description": "A simple Hello World extension that opens in the side panel",
-  "action": {
-    "default_title": "Open Hello World Side Panel"
-  },
-  "permissions": ["sidePanel"],
+  "description": "Annotate web pages and sync annotations across devices.",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "scripting",
+    "identity",
+    "sidePanel",
+    "tabs"
+  ],
   "side_panel": {
     "default_path": "index.html"
   },
-  "icons": {
-    "16": "icon16.png",
-    "48": "icon48.png",
-    "128": "icon128.png"
+  "action": {
+    "default_title": "Open Annotation App"
+  },
+  "background": {
+    "service_worker": "service-worker.js"
+  },
+  "oauth2": {
+    "client_id": "YOUR_GOOGLE_CLIENT_ID",
+    "scopes": ["profile", "email"]
   }
 }
