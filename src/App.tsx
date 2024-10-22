@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 function App() {
   const [currentURL, setCurrentURL] = useState('');
   const [text, setText] = useState('');
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     const queryTabs = async () => {
@@ -38,23 +39,22 @@ function App() {
     const newText = e.target.value;
     setText(newText);
     localStorage.setItem(`annotation-${currentURL}`, newText);
+    setMessage('Notes saved!');
+    setTimeout(() => setMessage(''), 2000);
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4">
-      <h1 className="text-2xl font-bold text-gray-800 mb-2">Annotation App</h1>
-      <input
-        type="text"
-        value={currentURL}
-        onChange={(e) => setCurrentURL(e.target.value)}
-        className="mb-2 p-2 border border-gray-300 rounded"
-      />
-      <textarea
-        value={text}
-        onChange={handleTextChange}
-        className="mb-2 p-2 border border-gray-300 rounded w-full"
-        rows={10}
-      />
+    <div className="min-h-screen bg-white flex flex-col items-center justify-center relative">
+            <p className="text-gray-600 mb-2 text-center">Current URL: {currentURL}</p>
+            <textarea
+              value={text}
+              onChange={handleTextChange}
+              className="p-2 border border-gray-300 w-full h-full" 
+              placeholder="Enter your annotation here..."
+            />
+            {message && (
+              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-green-500">{message}</div>
+            )}
     </div>
   );
 }
