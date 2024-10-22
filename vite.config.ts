@@ -1,3 +1,4 @@
+import path from "path"
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import copy from 'rollup-plugin-copy';
@@ -13,6 +14,11 @@ export default defineConfig({
       hook: 'writeBundle'
     })
   ],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
   build: {
     outDir: 'dist',
     rollupOptions: {
